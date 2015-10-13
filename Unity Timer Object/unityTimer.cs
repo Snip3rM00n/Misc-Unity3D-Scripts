@@ -14,8 +14,8 @@ using System;
 
 public class unityTimer : IDisposable
 {
-    public double remainingTime;
-    private double resetValue;
+	public double remainingTime;
+	private double resetValue;
 
 	private bool ticking = false;
 	private bool timerElapsed = false;
@@ -36,28 +36,28 @@ public class unityTimer : IDisposable
 	/// Initializes the unityTimer object with default value of 30 seconds.
 	/// </summary>
 	public unityTimer()
-    {
-        Initialize();
-    }
+	{
+		Initialize();
+	}
 
 	/// <summary>
 	/// Initializes the unityTimer object with a developer defined amount of seconds.
 	/// </summary>
 	/// <param name="timeToSet">An amount of seconds to initialize the timer at.</param>
 	public unityTimer(double timeToSet)
-    {
-        Initialize(timeToSet);
-    }
+	{
+		Initialize(timeToSet);
+	}
 
-    private void Initialize(double timeToSet = 30f)
-    {
-        remainingTime = timeToSet;
-        resetValue = timeToSet;
-    }
+	private void Initialize(double timeToSet = 30f)
+	{
+		remainingTime = timeToSet;
+		resetValue = timeToSet;
+	}
 
-    #endregion
+	#endregion
 
-    #region Work Methods
+	#region Work Methods
 
 	/// <summary>
 	/// Sets the remainingTime and the resetValue for the timer.
@@ -69,66 +69,66 @@ public class unityTimer : IDisposable
 		resetValue = timeToSet;
 	}
 
-    /// <summary>
-    /// Starts the Timer
-    /// </summary>
-    public void StartTimer()
-    {
-        ticking = true;
-    }
+	/// <summary>
+	/// Starts the Timer
+	/// </summary>
+	public void StartTimer()
+	{
+		ticking = true;
+	}
 
-    /// <summary>
-    /// Stops the Timer
-    /// </summary>
-    public void StopTimer()
-    {
-        ticking = false;
-    }
+	/// <summary>
+	/// Stops the Timer
+	/// </summary>
+	public void StopTimer()
+	{
+		ticking = false;
+	}
 
-    /// <summary>
-    /// Ticks the timer down using DeltaTime.
-    /// </summary>
-    public void Tick()
-    {
-        if (ticking)
-            if (remainingTime > 0)
-                remainingTime -= Time.deltaTime;
-            else
-            {
-                StopTimer();
-                timerElapsed = true;
-            }
-    }
+	/// <summary>
+	/// Ticks the timer down using DeltaTime.
+	/// </summary>
+	public void Tick()
+	{
+		if (ticking)
+			if (remainingTime > 0)
+				remainingTime -= Time.deltaTime;
+			else
+			{
+				StopTimer();
+				timerElapsed = true;
+			}
+	}
 
-    /// <summary>
-    /// Resets the timer
-    /// </summary>
-    public void reset()
-    {
-        timerElapsed = false;
-        remainingTime = resetValue;
-    }
+	/// <summary>
+	/// Resets the timer
+	/// </summary>
+	public void reset()
+	{
+		timerElapsed = false;
+		remainingTime = resetValue;
+	}
 
-    /// <summary>
-    /// Resets the timer
-    /// </summary>
-    /// <param name="stopTicking">Specifies if ticking should stop.</param>
-    public void reset(bool stopTicking)
-    {
-        reset();
+	/// <summary>
+	/// Resets the timer
+	/// </summary>
+	/// <param name="stopTicking">Specifies if ticking should stop.</param>
+	public void reset(bool stopTicking)
+	{
+		reset();
 
-        if (stopTicking)
-            StopTimer();
-    }
+		if (stopTicking)
+			StopTimer();
+	}
 
-    #endregion
+	#endregion
 
-    #region String Formaters
+	#region String Formaters
 
-    /// <summary>
-    /// Provides a string for the remaining time in the timer.
-    /// </summary>
-    /// <returns>Returns the time remaining without milliseconds.</returns>
+	/// <summary>
+	/// Provides a string for the remaining time in the timer.
+	/// </summary>
+	/// <returns>Returns the time remaining without milliseconds.</returns>
 	public override string ToString()
 	{
 		return Math.Round(remainingTime, 0).ToString();
@@ -139,9 +139,9 @@ public class unityTimer : IDisposable
 	/// </summary>
 	/// <param name="ms">Integer representing how many millisecond places to return.</param>
 	/// <returns>Returns the time remaining with ms millisecond places</returns>
-	public string ToString(int millies)
+	public string ToString(int ms)
 	{
-		return Math.Round(remainingTime, millies).ToString();
+		return Math.Round(remainingTime, ms).ToString();
 	}
 
 	#endregion
@@ -150,31 +150,31 @@ public class unityTimer : IDisposable
 
 	private bool disposed = false;
 
-    public void Dispose()
-    {
-        Dispose(true);
+	public void Dispose()
+	{
+		Dispose(true);
 
-        GC.SuppressFinalize(this);
-    }
+		GC.SuppressFinalize(this);
+	}
 
-    protected virtual void Dispose(bool disposing)
-    {
-        if (!this.disposed)
-        {
-            if (disposing)
-            {
-                remainingTime = 0;
-                resetValue = 0;
-            }
+	protected virtual void Dispose(bool disposing)
+	{
+		if (!this.disposed)
+		{
+			if (disposing)
+			{
+				remainingTime = 0;
+				resetValue = 0;
+			}
 
-            disposed = true;
-        }
-    }
+			disposed = true;
+		}
+	}
 
-    ~unityTimer()
-    {
-        Dispose(false);
-    }
-    
-    #endregion
+	~unityTimer()
+	{
+		Dispose(false);
+	}
+
+	#endregion
 }
